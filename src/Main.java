@@ -1,29 +1,31 @@
-import java.util.Arrays;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        int[]   nums = new int[]{3,4,5,6};
+        int[] nums = new int[]{3, 4, 5, 6};
         int target = 7;
-System.out.println(Arrays.toString(twoSum(nums, target)));
+        String strs[] = new String[]{"act","pots","tops","cat","stop","hat"};
+        System.out.println((groupAnagrams(strs)));
     }
 
-        public static int[] twoSum(int[] nums, int target) {
-            int a=-1,b=-1;
-            for (int i=0;i<nums.length-1;i++)
-            {
-                target=target-nums[i];
-                for (int j=i+1;j<nums.length;j++)
-                {
-                    if(nums[j]==target)
-                    {
-                        if (i<j)
-                        { a =i;b=j;}
-                        else{ b=i;a=j;}
-                    }
-                }
+    public static List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> ans = new HashMap<>();
+
+        for (String s : strs) {
+            int[] count = new int[26];
+            for (char c : s.toCharArray()) {
+                count[c - 'a']++;
             }
-//int[] num = {a,b};
 
-            return new int[]{a,b}  ;
+            String key = Arrays.toString(count);
+            System.out.println(key);
+            if (!ans.containsKey(key)) {
+                ans.put(key, new ArrayList<>());
+            }
+
+            ans.get(key).add(s);
         }
+
+        return new ArrayList<>(ans.values());
     }
+}
